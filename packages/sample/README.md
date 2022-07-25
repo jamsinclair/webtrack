@@ -31,7 +31,7 @@ A live version is hosted at https://webtrack.vercel.app/
 ### Constructor `new Smp(options?)`
 Options: 
 - `src`: A typed array or ArrayBuffer of the sample file
-- `bitDepth`: (Default, `'16'`) The bit depth of the sample. Either 8, 16, 32 or 32 Float. Indicative of the typed array. An 8 bit depth PCM sample data would be stored in an Int8Array.
+- `bitDepth`: (Default, `'8'`) The bit depth of the sample. Either 8, 16, 32 or 32 Float. Indicative of the typed array. An 8 bit depth PCM sample data would be stored in an Int8Array.
 - `sampleRate`: (Default, `11025`) The sample rate the sample should be played back with. Altering this will affect the speed and pitch of playback.
 - `loop`: (Default, `false`) Whether the sample should loop or not.
 
@@ -41,7 +41,7 @@ Load a sample file in preparation to play
 
 Options: 
 - `src`: A typed array or ArrayBuffer of the sample file
-- `bitDepth`: (Default, `'16'`) The bit depth of the sample. Either 8, 16, 32 or 32 Float. Indicative of the typed array. An 8 bit depth PCM sample data would be stored in an Int8Array.
+- `bitDepth`: (Default, `'8'`) The bit depth of the sample. Either 8, 16, 32 or 32 Float. Indicative of the typed array. An 8 bit depth PCM sample data would be stored in an Int8Array.
 - `sampleRate`: (Default, `11025`) The sample rate the sample should be played back with. Altering this will affect the speed and pitch of playback.
 - `loop`: (Default, `false`) Whether the sample should loop or not.
 

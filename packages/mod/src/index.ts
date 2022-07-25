@@ -18,13 +18,6 @@ type ModOptions = {
 
 let _fetchedWasmBuffer: ArrayBuffer | null = null;
 
-/**
- * This class is the newer approach that uses an AudioWorkletProcessor.
- *
- * There is currently an issue with the `micromod` library and playing back with a smaller buffer size.
- * The AudioWorkletProcessor calls the process method with a small buffer size of 128 samples.
- * This is a known issue and will be fixed in the future.
- */
 export class Mod {
   context: AudioContext;
   node: AudioWorkletNode | null = null;

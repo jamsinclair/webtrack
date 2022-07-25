@@ -6,9 +6,12 @@ Uses latest HTML5 Audio features:
 - Audio Worklet Node to move processing off the main thread
 - AudioBufferSourceNode for PCM playback
 
-**Currently Supporting:**
+**Example Site:** https://webtrack.vercel.app/
 
-- Module files (using [HxCMOD player](https://github.com/jfdelnero/HxCModPlayer)). Supports the Noisetracker/Soundtracker/Protracker/Fasttracker Module Format (`*.mod`)
-  - See: [@webtrack/mod](./packages/mod/)
-- Sample files. Raw PCM samples output from Protracker Fasttracker (`*.raw` or `*.smp`).
-  - See: [@webtrack/smp](./packages/sample/)
+## Currently Supports
+
+### [@webtrack/mod](./packages/mod/)
+Module file player (using [HxCMOD player](https://github.com/jfdelnero/HxCModPlayer)). Supports the Noisetracker/Soundtracker/Protracker/Fasttracker Module Format (`*.mod`)
+
+### [@webtrack/smp](./packages/sample/)
+Sample file player. For raw PCM samples output from Protracker Fasttracker (`*.raw` or `*.smp`).

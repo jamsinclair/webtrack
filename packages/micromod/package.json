@@ -1,0 +1,21 @@
+{
+  "name": "@webtrack/micromod",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/worklet.js",
+  "types": "dist/*.d.ts",
+  "files": [
+    "acknowledgements.txt",
+    "micromod-license.txt",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc && rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "^2.76.0",
+    "tsconfig": "*",
+    "tslib": "^2.4.0",
+    "typescript": "^4.5.2"
+  }
+}

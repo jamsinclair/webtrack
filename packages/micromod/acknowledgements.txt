@@ -1,0 +1,3 @@
+This module is a TypeScript port of https://github.com/martincameron/micromod/tree/master/micromod-js.
+
+The original license is copied and distributed with this package (see ./micromod-license.txt).

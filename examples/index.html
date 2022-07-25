@@ -65,7 +65,7 @@
         Bit Depth:
         <select id="sample-bit-depth">
             <option value="8">8 Bit Int</option>
-            <option value="16" selected>16 Bit Int</option>
+            <option value="16">16 Bit Int</option>
             <option value="24">24 Bit Int</option>
             <option value="32">32 Bit Int</option>
             <option value="32f">32 Bit Float</option>
@@ -76,11 +76,12 @@
     <script type="module">
         import { Smp } from "@webtrack/smp";
         let currentSample = null;
+        let currentBitDepth = '8';
         document.querySelector('#sample-upload').addEventListener('change', event => {
             const file = event.target.files[0];
             const reader = new FileReader();
             reader.onloadend = function( event ) {
-                currentSample = new Smp({ src: reader.result });
+                currentSample = new Smp({ src: reader.result, bitDepth: currentBitDepth });
             };
             reader.readAsArrayBuffer( file );
         });
@@ -94,7 +95,8 @@
                 currentSample?.setSampleRate(parseInt(event.target.value));
         });
         document.querySelector('#sample-bit-depth').addEventListener('change', event => {
-                currentSample?.setBitDepth(event.target.value);
+                currentBitDepth = event.target.value;
+                currentSample?.setBitDepth(currentBitDepth);
         });
     </script>
 </body>

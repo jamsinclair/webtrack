@@ -17,7 +17,7 @@ const BitDepthToTypedArray = {
 const BitDepths = ["8", "16", "32", "32f"] as const;
 type BitDepth = typeof BitDepths[number];
 
-const DEFAULT_BITDEPTH: BitDepth = "16";
+const DEFAULT_BITDEPTH: BitDepth = "8";
 const DEFAULT_SAMPLE_RATE: number = 11025;
 
 // I believe Fasttracker II uses mono samples?

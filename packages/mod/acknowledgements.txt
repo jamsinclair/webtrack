@@ -1,0 +1,3 @@
+This module is a JS wrapper and port of https://github.com/jfdelnero/HxCModPlayer
+
+The original license is copied and distributed with this package (see ./hxcmodplayer-license.txt).

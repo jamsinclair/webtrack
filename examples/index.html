@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examples of how to use ft2audio modules</title>
+    <style>
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        hr {
+            margin: 48px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Play FastTracker II Mod file</h1>
+    <p>Select a mod file to play.</p>
+    <label>
+        Mod File:
+        <input type="file" id="mod-upload" />
+    </label>
+    <button id="mod-play">Play</button>
+    <button id="mod-pause">Pause</button>
+    <button id="mod-stop">Stop</button>
+    <script type="module">
+        import { Mod } from "@webtrack/mod";
+        let currentSong = null;
+        document.querySelector('#mod-upload').addEventListener('change', event => {
+            if (currentSong) {
+                currentSong.stop();
+            }
+
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onloadend = function( event ) {
+                currentSong = new Mod({ src: new Int8Array( reader.result ) });
+            };
+            reader.readAsArrayBuffer( file );
+        });
+        document.querySelector('#mod-play').addEventListener('click', event => {
+                currentSong?.play();
+        });
+        document.querySelector('#mod-pause').addEventListener('click', event => {
+                currentSong?.pause();
+        });
+        document.querySelector('#mod-stop').addEventListener('click', event => {
+                currentSong?.stop();
+        });
+    </script>
+    <hr>
+    <h1>Play FastTracker II Sample</h1>
+    <p>Select a sample file to play. Optionally configure the sample rate and bit depth.</p>
+    <label>
+        Sample:
+        <input type="file" id="sample-upload" />
+    </label>
+    <label>
+        Sample Rate:
+        <input type="number" id="sample-rate" value="11025" /> HZ
+    </label>
+    <label>
+        Bit Depth:
+        <select id="sample-bit-depth">
+            <option value="8">8 Bit Int</option>
+            <option value="16" selected>16 Bit Int</option>
+            <option value="24">24 Bit Int</option>
+            <option value="32">32 Bit Int</option>
+            <option value="32f">32 Bit Float</option>
+        </select>
+    </label>
+    <button id="sample-play">Play</button>
+    <button id="sample-stop">Stop</button>
+    <script type="module">
+        import { Smp } from "@webtrack/smp";
+        let currentSample = null;
+        document.querySelector('#sample-upload').addEventListener('change', event => {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onloadend = function( event ) {
+                currentSample = new Smp({ src: reader.result });
+            };
+            reader.readAsArrayBuffer( file );
+        });
+        document.querySelector('#sample-play').addEventListener('click', event => {
+                currentSample?.play();
+        });
+        document.querySelector('#sample-stop').addEventListener('click', event => {
+                currentSample?.stop();
+        });
+        document.querySelector('#sample-rate').addEventListener('change', event => {
+                currentSample?.setSampleRate(parseInt(event.target.value));
+        });
+        document.querySelector('#sample-bit-depth').addEventListener('change', event => {
+                currentSample?.setBitDepth(event.target.value);
+        });
+    </script>
+</body>
+</html>

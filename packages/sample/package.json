@@ -1,0 +1,14 @@
+{
+  "name": "@webtrack/smp",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "types": "dist/*.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "tsconfig": "*",
+    "typescript": "^4.5.2"
+  }
+}

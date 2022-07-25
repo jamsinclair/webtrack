@@ -10,7 +10,7 @@
     "dist"
   ],
   "scripts": {
-    "build:wasm": "cd src/hxcmodplayer && make all",
+    "build:wasm": "if [ \"$SKIP_WASM_BUILD\" != \"true\" ]; then cd src/hxcmodplayer && make all; fi",
     "build:js": "tsc",
     "build:worklet": "rollup -c",
     "build:copy": "cp src/hxcmod_player.js src/hxcmod_player.wasm dist",

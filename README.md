@@ -11,7 +11,7 @@ Uses latest HTML5 Audio features:
 ## Currently Supports
 
 ### [@webtrack/mod](./packages/mod/)
-Module file player (using [HxCMOD player](https://github.com/jfdelnero/HxCModPlayer)). Supports the Noisetracker/Soundtracker/Protracker/Fasttracker Module Format (`*.mod`).
+Module file player (using [`micromod`](https://github.com/martincameron/micromod)). Supports the Noisetracker/Soundtracker/Protracker/Fasttracker Module Format (`*.mod`).
 
 ### [@webtrack/smp](./packages/sample/)
-Sample file player. For raw PCM samples output from Protracker Fasttracker (`*.raw` or `*.smp`).
+Sample file player. For raw PCM samples output from Protracker & Fasttracker (`*.raw` or `*.smp`).

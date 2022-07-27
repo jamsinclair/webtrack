@@ -4,7 +4,7 @@ Uses Web Audio API to playback `*.mod` files in the browser.
 
 Supports the Noisetracker/Soundtracker/Protracker/Fasttracker Module Format (`*.mod`).
 
-Powered by the wasm [`HxCMod Player`](https://github.com/jfdelnero/HxCModPlayer).
+Mod player is derived from the JS version of [`micromod`](https://github.com/martincameron/micromod).
 
 ## Usage
 
@@ -30,9 +30,8 @@ A live version is hosted at https://webtrack.vercel.app/
 
 ## API
 
-### Constructor `new Mod(options?: { src?: ArrayBuffer | Int8Array, wasmBuffer?: ArrayBuffer })`
+### Constructor `new Mod(options?: { src?: ArrayBuffer | Int8Array })`
 - Optional `src`: The mod file to play. Can be either an ArrayBuffer or Int8Array.
-- Optional `wasmBuffer`: If the wasm module can't be instantiated automatically, you can manually pass this in. You'll need to fetch the wasm file yourself as an ArrayBuffer. It is bundled with the module at `@webtrack/mod/dist/hxcmod_player.wasm`.
 
 ### `.loadData({ src: ArrayBuffer | Int8Array }): Promise<void>`
 

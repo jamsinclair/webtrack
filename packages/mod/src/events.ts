@@ -1,3 +1,12 @@
+type InitWasmEvent = {
+  command: "initWasm";
+  file: ArrayBuffer;
+};
+export const initWasmEvent = (file: ArrayBuffer): InitWasmEvent => ({
+  command: "initWasm",
+  file,
+});
+
 type LoadDataEvent = {
   command: "loadData";
   file: ArrayBuffer | Int8Array;
@@ -27,4 +36,9 @@ type StopEvent = {
 };
 export const stopEvent = (): StopEvent => ({ command: "stop" });
 
-export type ProcessorEvent = LoadDataEvent | PlayEvent | PauseEvent | StopEvent;
+export type ProcessorEvent =
+  | InitWasmEvent
+  | LoadDataEvent
+  | PlayEvent
+  | PauseEvent
+  | StopEvent;

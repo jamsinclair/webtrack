@@ -1,22 +1,28 @@
 {
   "name": "@webtrack/mod",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "license": "MIT",
+  "repository": "jamsinclair/webtrack",
   "main": "dist/index.js",
   "types": "dist/*.d.ts",
-  "repository": "jamsinclair/webtrack",
   "files": [
     "acknowledgements.txt",
-    "micromod-license.txt",
+    "hxcmodplayer-license.txt",
     "dist"
   ],
   "scripts": {
-    "build": "tsc && rollup -c"
+    "build:wasm": "if [ \"$SKIP_WASM_BUILD\" != \"true\" ]; then cd src/hxcmodplayer && make all; fi",
+    "build:js": "tsc",
+    "build:worklet": "rollup -c",
+    "build:copy": "cp src/hxcmod_player.js src/hxcmod_player.wasm dist",
+    "build": "npm run build:wasm && npm run build:js && npm run build:worklet && npm run build:copy"
   },
   "devDependencies": {
     "rollup": "^2.76.0",
     "tsconfig": "*",
     "tslib": "^2.4.0",
     "typescript": "^4.5.2"
-  }
+  },
+  "type": "module",
+  "sideEffects": false
 }

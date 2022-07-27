@@ -5,5 +5,5 @@
     "outDir": "dist"
   },
   "include": ["src"],
-  "exclude": ["dist", "build", "node_modules", "src/hxcmodplayer"]
+  "exclude": ["dist", "build", "node_modules"]
 }

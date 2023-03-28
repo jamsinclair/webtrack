@@ -117,17 +117,8 @@ export class Smp {
 
   setVolume(volume: number) {
     this.volume = clampVolume(volume);
-    if (this.gainNode && this.volume > 0) {
-      this.gainNode.gain.linearRampToValueAtTime(
-        this.volume,
-        this.context.currentTime + 0.01
-      );
-    } else if (this.gainNode && this.volume === 0) {
-      this.gainNode.gain.linearRampToValueAtTime(
-        0.01,
-        this.context.currentTime + 0.01
-      );
-      this.gainNode.gain.setValueAtTime(0, this.context.currentTime + 0.015);
+    if (this.gainNode) {
+      this.gainNode.gain.value = this.volume;
     }
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "@webtrack/smp",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "dist/index.js",
   "types": "dist/*.d.ts",
   "repository": "jamsinclair/webtrack",

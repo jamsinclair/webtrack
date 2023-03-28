@@ -11,11 +11,12 @@
     "dist"
   ],
   "scripts": {
+    "clean": "rm -rf dist",
     "build:wasm": "if [ \"$SKIP_WASM_BUILD\" != \"true\" ]; then cd src/hxcmodplayer && make all; fi",
     "build:js": "tsc",
     "build:worklet": "rollup -c",
     "build:copy": "cp src/hxcmod_player.js src/hxcmod_player.wasm dist",
-    "build": "npm run build:wasm && npm run build:js && npm run build:worklet && npm run build:copy"
+    "build": "npm run clean && npm run build:wasm && npm run build:js && npm run build:worklet && npm run build:copy"
   },
   "devDependencies": {
     "rollup": "^2.76.0",

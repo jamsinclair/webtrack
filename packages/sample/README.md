@@ -2,7 +2,7 @@
 
 Uses Web Audio API to playback `*.smp`/`*.raw` PCM files in the browser.
 
-Intends to support samples created with Protracker, Fasttracker II etc. 
+Intends to support samples created with Protracker, Fasttracker II etc.
 
 ## Usage
 
@@ -13,10 +13,11 @@ npm install -S @webtrack/smp
 ```
 
 You'll need to load a sample file into the browser. Likely fetching from a remote resource:
-```js
-import { Smp } from '@webtrack/smp';
 
-const source = await fetch('/cool-sound.smp').then(res => res.arrayBuffer());
+```js
+import { Smp } from "@webtrack/smp";
+
+const source = await fetch("/cool-sound.smp").then((res) => res.arrayBuffer());
 
 const sample = new Smp({ src: source });
 sample.play();
@@ -29,7 +30,9 @@ A live version is hosted at https://webtrack.vercel.app/
 ## API
 
 ### Constructor `new Smp(options?)`
-Options: 
+
+Options:
+
 - `src`: A typed array or ArrayBuffer of the sample file
 - `bitDepth`: (Default, `'8'`) The bit depth of the sample. Either 8, 16, 32 or 32 Float. Indicative of the typed array. An 8 bit depth PCM sample data would be stored in an Int8Array.
 - `sampleRate`: (Default, `11025`) The sample rate the sample should be played back with. Altering this will affect the speed and pitch of playback.
@@ -39,7 +42,8 @@ Options:
 
 Load a sample file in preparation to play
 
-Options: 
+Options:
+
 - `src`: A typed array or ArrayBuffer of the sample file
 - `bitDepth`: (Default, `'8'`) The bit depth of the sample. Either 8, 16, 32 or 32 Float. Indicative of the typed array. An 8 bit depth PCM sample data would be stored in an Int8Array.
 - `sampleRate`: (Default, `11025`) The sample rate the sample should be played back with. Altering this will affect the speed and pitch of playback.

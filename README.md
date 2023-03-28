@@ -3,6 +3,7 @@
 A collection of media players for Tracker music used in Video Games.
 
 Uses latest HTML5 Audio features:
+
 - Audio Worklet Node to move processing off the main thread
 - AudioBufferSourceNode for PCM playback
 
@@ -11,7 +12,9 @@ Uses latest HTML5 Audio features:
 ## Currently Supports
 
 ### [@webtrack/mod](./packages/mod/)
+
 Module file player (using [HxCMOD player](https://github.com/jfdelnero/HxCModPlayer)). Supports the Noisetracker/Soundtracker/Protracker/Fasttracker Module Format (`*.mod`).
 
 ### [@webtrack/smp](./packages/sample/)
+
 Sample file player. For raw PCM samples output from Protracker Fasttracker (`*.raw` or `*.smp`).

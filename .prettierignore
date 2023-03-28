@@ -1,0 +1,5 @@
+dist
+examples
+packages/mod/src/hxcmod_player.js
+packages/mod/src/hxcmodplayer
+*.d.ts

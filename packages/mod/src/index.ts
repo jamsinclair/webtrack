@@ -14,6 +14,8 @@ const DEFAULT_SAMPLE_RATE = 48000;
 type ModOptions = {
   src?: ArrayBuffer | Int8Array;
   wasmBuffer?: ArrayBuffer;
+  wasmUrl?: string;
+  audioWorkletUrl?: string;
 };
 
 let _fetchedWasmBuffer: ArrayBuffer | null = null;
@@ -26,17 +28,17 @@ export class Mod {
   loadWasmPromise: Promise<void>;
   wasmBuffer: ArrayBuffer | null = null;
 
-  constructor({ src, wasmBuffer }: ModOptions = {}) {
+  constructor({ src, wasmBuffer, audioWorkletUrl, wasmUrl }: ModOptions = {}) {
     this.context = new AudioContext();
     this.loadProcessorPromise = this.context.audioWorklet.addModule(
-      new URL("mod-processor.js", import.meta.url)
+      audioWorkletUrl || new URL("mod-processor.js", import.meta.url)
     );
     this.loadWasmPromise = Promise.resolve();
     this.wasmBuffer = wasmBuffer || _fetchedWasmBuffer;
 
     if (!wasmBuffer && !_fetchedWasmBuffer) {
       this.loadWasmPromise = fetch(
-        new URL("hxcmod_player.wasm", import.meta.url)
+        wasmUrl || new URL("hxcmod_player.wasm", import.meta.url)
       )
         .then((response) => response.arrayBuffer())
         .then((buffer) => {

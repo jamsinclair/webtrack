@@ -21,9 +21,8 @@ type ModOptions = {
 
 let _fetchedWasmBuffer: ArrayBuffer | null = null;
 
-// Clamp the volume to a range between 0.01 and 1.
-// We cannot use 0 because we can't ramp the gain to non-positive value.
-const clampVolume = (volume: number) => Math.max(0.01, Math.min(volume, MAX_GAIN));
+// Clamp the volume to a range between 0 and 1.
+const clampVolume = (volume: number) => Math.max(0, Math.min(volume, MAX_GAIN));
 
 export class Mod {
   context: AudioContext;
@@ -137,8 +136,17 @@ export class Mod {
   setVolume(volume: number) {
     // Prevent extreme volume being accidentally set
     this.volume = clampVolume(volume);
-    if (this.gainNode) {
-      this.gainNode.gain.linearRampToValueAtTime(this.volume, this.context.currentTime + 0.01);
+    if (this.gainNode && this.volume > 0) {
+      this.gainNode.gain.linearRampToValueAtTime(
+        this.volume,
+        this.context.currentTime + 0.01
+      );
+    } else if (this.gainNode && this.volume === 0) {
+      this.gainNode.gain.linearRampToValueAtTime(
+        0.01,
+        this.context.currentTime + 0.01
+      );
+      this.gainNode.gain.setValueAtTime(0, this.context.currentTime + 0.015);
     }
   }
 }

@@ -60,3 +60,7 @@ Pauses playback of the sample
 ### `.stop()`
 
 Stops playback of the current sample. Playing again will resume from the start.
+
+### `.setVolume(volume)`
+
+Sets the current volume of the sample. The value is between `1` and `0`. `1` being 100%, `0.5` being `50%` etc.

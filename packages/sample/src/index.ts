@@ -24,6 +24,8 @@ const DEFAULT_SAMPLE_RATE: number = 11025;
 // Let's keep channels at 1 for now
 const NUM_OF_CHANNELS = 1;
 
+const MAX_GAIN = 1;
+
 const convertToFloat32Data = (src: TypedArrays, bitDepth: BitDepth) => {
   const dest = new Float32Array(src.length);
   for (let i = 0; i < src.length; i++) {
@@ -31,6 +33,10 @@ const convertToFloat32Data = (src: TypedArrays, bitDepth: BitDepth) => {
   }
   return dest;
 };
+
+// Clamp the volume to a range between 0.01 and 1.
+// We cannot use 0 because we can't ramp the gain to non-positive value.
+const clampVolume = (volume: number) => Math.max(0.01, Math.min(volume, MAX_GAIN));
 
 type SmpData = {
   src: TypedArrays | ArrayBuffer;
@@ -111,9 +117,9 @@ export class Smp {
   }
 
   setVolume(volume: number) {
-    this.volume = volume;
+    this.volume = clampVolume(volume);
     if (this.gainNode) {
-      this.gainNode.gain.value = volume;
+      this.gainNode.gain.linearRampToValueAtTime(this.volume, this.context.currentTime + 0.01);
     }
   }
 

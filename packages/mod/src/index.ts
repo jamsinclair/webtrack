@@ -10,6 +10,7 @@ const PROCESSOR_MODULE_NAME = "mod-processor";
 const NUM_OF_INPUTS = 0;
 const NUM_OF_OUTPUTS = 2;
 const DEFAULT_SAMPLE_RATE = 48000;
+const MAX_GAIN = 1;
 
 type ModOptions = {
   src?: ArrayBuffer | Int8Array;
@@ -20,13 +21,19 @@ type ModOptions = {
 
 let _fetchedWasmBuffer: ArrayBuffer | null = null;
 
+// Clamp the volume to a range between 0.01 and 1.
+// We cannot use 0 because we can't ramp the gain to non-positive value.
+const clampVolume = (volume: number) => Math.max(0.01, Math.min(volume, MAX_GAIN));
+
 export class Mod {
   context: AudioContext;
+  gainNode: GainNode | null = null;
   node: AudioWorkletNode | null = null;
   data: ArrayBuffer | Int8Array | null = null;
   loadProcessorPromise: Promise<void>;
   loadWasmPromise: Promise<void>;
   wasmBuffer: ArrayBuffer | null = null;
+  volume: number = 1;
 
   constructor({ src, wasmBuffer, audioWorkletUrl, wasmUrl }: ModOptions = {}) {
     this.context = new AudioContext();
@@ -92,6 +99,10 @@ export class Mod {
     if (this.context.state === "suspended") {
       await this.context.resume();
     }
+    if (!this.gainNode) {
+      this.gainNode = this.context.createGain();
+      this.gainNode.gain.value = this.volume;
+    }
     if (!this.node) {
       this.node = this.#createNode();
 
@@ -100,7 +111,9 @@ export class Mod {
         await this.loadData(this.data);
       }
     }
-    this.node.connect(this.context.destination);
+
+    this.gainNode.connect(this.context.destination);
+    this.node.connect(this.gainNode);
     this.node.port.postMessage(playEvent());
   }
 
@@ -119,5 +132,13 @@ export class Mod {
     this.node.port.postMessage(stopEvent());
     this.node = null;
     await this.context.suspend();
+  }
+
+  setVolume(volume: number) {
+    // Prevent extreme volume being accidentally set
+    this.volume = clampVolume(volume);
+    if (this.gainNode) {
+      this.gainNode.gain.linearRampToValueAtTime(this.volume, this.context.currentTime + 0.01);
+    }
   }
 }

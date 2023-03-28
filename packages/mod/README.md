@@ -72,3 +72,7 @@ Pauses playback of the current mod file
 ### `.stop(): Promise<void>`
 
 Stops playback of the current mod file. Playing again will resume from the start.
+
+### `.setVolume(volume: number): void`
+
+Sets the volume of playback. The value is between `1` and `0`. `1` being 100%, `0.5` being `50%` etc.
